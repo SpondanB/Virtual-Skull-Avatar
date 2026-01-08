@@ -105,17 +105,6 @@ Press **close** on the window to exit.
 
 ---
 
-## Portfolio Use
-This project is suitable for showcasing:
-- AI / ML Master's applications
-- Computer vision internships
-- Graphics programming roles
-- Human–computer interaction research
-
-It demonstrates the ability to **bridge perception and graphics**, turning raw sensor data into expressive, real-time visual behavior.
-
----
-
 ## Author
 **Spondan Bandyopadhyay**  
 Interests: Computer Vision, Graphics, AI Systems
