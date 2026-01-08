@@ -45,7 +45,7 @@ This project was built entirely from scratch using **Python**, without relying o
 ## Installation
 
 ### Requirements
-- A standard Laptop with Python (3.10) installed
+- A standard device with Python (3.10) installed
 - mentioned list of python packages
 - Webcam
 
