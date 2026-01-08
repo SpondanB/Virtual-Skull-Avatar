@@ -10,6 +10,8 @@ It combines **computer vision**, **3D geometry**, and **real-time rendering**, s
 
 This project was built entirely from scratch using **Python**, without relying on high-level 3D engines such as Unity or Blender.
 
+This project is an updated version of the previous [Face Tracker Project](https://github.com/SpondanB/FaceTracker) that I did. The final result of that project is added in the "Old version" directory.
+
 ---
 
 ## Key Features
@@ -73,7 +75,7 @@ Press **close** on the window to exit.
 ## Project Structure
 ```
 ├── Old version
-|   ├── OldVer.py
+|   ├── OldVer.py # Result of the previous attempt
 ├── Tests         # Test applications
 |   ├── test-3d-obj.py
 |   ├── test-combined-with-blinking.py
