@@ -75,15 +75,15 @@ Press **close** on the window to exit.
 ## Project Structure
 ```
 ├── Old version
-|   ├── OldVer.py # Result of the previous attempt
+|   └── OldVer.py # Result of the previous attempt
 ├── Tests         # Test applications
 |   ├── test-3d-obj.py
 |   ├── test-combined-with-blinking.py
 |   ├── test-combined.py
 |   ├── test-rpy-calc.py
-|   ├── test-thread-combined.py
+|   └── test-thread-combined.py
 ├── Main.py        # Core application
-├── README.md      # Project documentation
+└── README.md      # Project documentation
 ```
 
 ---
