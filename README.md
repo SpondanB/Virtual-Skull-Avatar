@@ -6,7 +6,7 @@ This project demonstrates a **real-time, camera-driven 3D animation system** whe
 It combines **computer vision**, **3D geometry**, and **real-time rendering**, showcasing practical skills in:
 - Human–computer interaction
 - Face tracking and pose estimation
-- Lightweight 3D graphics without game engines
+- Lightweight 3D graphics (using pygame) without game engines
 
 This project was built entirely from scratch using **Python**, without relying on high-level 3D engines such as Unity or Blender.
 
