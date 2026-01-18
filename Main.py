@@ -155,6 +155,35 @@ JAW_VERTICES = [
     27, 28            # jaw sides
 ]
 
+# ============================================================
+# Particle System (Floating Aura Below Jaw)
+# ============================================================
+
+class Particle:
+    def __init__(self, pos):
+        self.pos = np.array(pos, dtype=float)
+        self.vel = np.array([
+            np.random.uniform(-0.01, 0.01),
+            np.random.uniform(-0.03, -0.01),
+            np.random.uniform(-0.01, 0.01)
+        ])
+        self.life = np.random.randint(40, 80)
+        self.size = np.random.randint(2, 5)
+
+    def update(self):
+        self.pos += self.vel
+        self.vel[1] -= 0.0005   # gentle upward float
+        self.life -= 1
+
+    def alive(self):
+        return self.life > 0
+
+
+particles = []
+
+# Spawn multiple particles per frame
+SPAWN_RATE = 10      # particles per frame
+MAX_PARTICLES = 650
 
 # ============================================================
 # Math Utilities
@@ -208,6 +237,12 @@ def mouth_open_ratio(lm, upper, lower, w, h):
 
 jaw_open = 0.0          # smoothed jaw openness (0–1)
 JAW_OPEN_SCALE = 0.235  # translation strength (tune this)
+
+# helper for particle movement
+def project_particle(v):
+    fov = 500
+    z = v[2] + 4
+    return int(v[0]*fov/z + WIDTH/2), int(-v[1]*fov/z + HEIGHT/2)
 
 # ============================================================
 # Main Loop
@@ -300,6 +335,7 @@ while running:
     # rotated = [R @ v for v in vertices] # regular version
     # updated to show jaw motion
     rotated = []
+
     for idx, v in enumerate(vertices):
         v_rot = R @ v
 
@@ -313,6 +349,32 @@ while running:
 
         rotated.append(v_rot)
     # ==========================================================
+    
+    # ----- Particle spawn under jaw -----
+    jaw_indices = [22, 23, 27, 28]
+    jaw_center = np.mean([rotated[i] for i in jaw_indices], axis=0)
+
+    for _ in range(SPAWN_RATE):
+        if len(particles) < MAX_PARTICLES:
+            particles.append(Particle(jaw_center))
+
+    # ============================================================
+    # Draw Floating Particles
+    # ============================================================
+
+    alive_particles = []
+    for p in particles:
+        p.update()
+        if p.alive():
+            x, y = project_particle(p.pos)
+            alpha = int(255 * (p.life / 80))
+            surf = pygame.Surface((p.size*2, p.size*2), pygame.SRCALPHA)
+            pygame.draw.circle(surf, (4, 131, 138, alpha), (p.size, p.size), p.size)
+            screen.blit(surf, (x-p.size, y-p.size))
+            alive_particles.append(p)
+
+    particles = alive_particles
+    # ============================================================
 
     projected = [project(v) for v in rotated]
 
