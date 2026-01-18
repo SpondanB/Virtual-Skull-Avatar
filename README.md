@@ -7,6 +7,7 @@ It combines **computer vision**, **3D geometry**, and **real-time rendering**, s
 - Human–computer interaction
 - Face tracking and pose estimation
 - Lightweight 3D graphics (using pygame) without game engines
+- Physics-inspired Particle Systems
 
 This project was built entirely from scratch using **Python**, without relying on high-level 3D engines such as Unity or Blender.
 
@@ -15,12 +16,16 @@ This project is an updated version of the previous [Face Tracker Project](https:
 ---
 
 ## Key Features
-- 🎯 **Real-time head pose tracking** (yaw, pitch, roll)
-- 👁️ **Blink detection** with smooth eyelid animation
-- 👄 **Mouth opening detection** driving jaw articulation
-- 🦴 **Custom 3D skull mesh** rendered using pure math
-- 💡 **Dynamic lighting and face-based shading**
-- ⚡ Runs at ~60 FPS on a standard laptop webcam
+
+| Feature                | Description                                    |
+| ---------------------- | ---------------------------------------------- |
+| 🧭 Head Pose Tracking  | Pitch, Yaw, Roll control the skull orientation |
+| 👁 Blink Detection     | Eye Aspect Ratio controls eyelid animation     |
+| 👄 Mouth Tracking      | Jaw opens and closes with your mouth           |
+| 💀 Custom 3D skull mesh      | Rendered using just the mathematical coordinates |
+| ✨ Particle Aura        | Procedural floating particles under the jaw    |
+| 💡 Lighting System     | Face normal lighting with depth sorting        |
+| 🎮 Real-Time Rendering | 60 FPS Pygame 3D renderer                      |
 
 ---
 
@@ -34,13 +39,49 @@ This project is an updated version of the previous [Face Tracker Project](https:
 
 ---
 
-## Skills Demonstrated
-- Computer Vision (OpenCV, MediaPipe)
-- Linear Algebra & 3D Transformations
-- Real-Time Systems
-- Graphics Math (normals, lighting, projection)
-- Signal smoothing & noise handling
-- Python performance optimization
+## 🧩 System Architecture
+
+```
+Webcam → MediaPipe Face Mesh → SolvePnP → Rotation Matrix
+                     ↓
+         Blink + Mouth Detection
+                     ↓
+     3D Skull Transformation + Jaw Rig
+                     ↓
+     Lighting + Projection + Z-Sorting
+                     ↓
+           Pygame Renderer
+```
+
+---
+
+## 🧠 Key Concepts Demonstrated
+
+### 1. Head Pose Estimation
+
+* 3D face model + 2D landmarks
+* `cv2.solvePnP()` estimates camera-space rotation
+* Rodrigues → Rotation Matrix → Euler Angles
+
+### 2. 3D Rendering Pipeline
+
+* Custom vertex buffer
+* Face normal lighting
+* Perspective projection
+* Depth sorting (Painter’s Algorithm)
+
+### 3. Facial Animation
+
+* Eye Aspect Ratio → Blink animation
+* Mouth distance → Jaw rigging
+* Smooth interpolation for realism
+
+### 4. Particle System
+
+* Procedural particle emission
+* Physics-based motion
+* Lifetime fading
+* Alpha blending
 
 ---
 
@@ -105,8 +146,18 @@ Press **close** on the window to exit.
 
 ---
 
+## ⭐ Why This Project Matters
+
+This project showcases:
+
+* Advanced applied linear algebra
+* Real-time computer vision pipelines
+* Interactive 3D graphics from scratch
+
+---
+
 ## Author
 **Spondan Bandyopadhyay**  
-Interests: Computer Vision, Graphics, AI Systems
+Interests: Computer Vision, Graphics, AI Systems, Human-Computer Interaction
 
 ---
